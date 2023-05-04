@@ -27,7 +27,7 @@ class TDisplayS3 : public PollingComponent,
 //         spr.createSprite(320, 240);
 //         spr2.createSprite(320, 240);
 //         spr.fillScreen(TFT_WHITE);
-        spr.fillSprite(TFT_WHITE)
+//         spr.fillSprite(TFT_WHITE)
     }
 
     void loop() override {
@@ -57,8 +57,10 @@ class TDisplayS3 : public PollingComponent,
     // DisplayBuffer methods
     //////////
     void fill(Color color) override {
-        spr.fillScreen(display::ColorUtil::color_to_565(color));
-        spr2.fillScreen(display::ColorUtil::color_to_565(color));
+//         spr.fillScreen(display::ColorUtil::color_to_565(color));
+//         spr2.fillScreen(display::ColorUtil::color_to_565(color));
+           spr.fillScreen(TFT_WHITE);
+	   spr2.fillScreen(TFT_WHITE);
     }
 
     int get_width_internal() override {
