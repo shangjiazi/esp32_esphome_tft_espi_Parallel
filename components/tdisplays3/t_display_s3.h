@@ -57,10 +57,10 @@ class TDisplayS3 : public PollingComponent,
     // DisplayBuffer methods
     //////////
     void fill(Color color) override {
-//         spr.fillScreen(display::ColorUtil::color_to_565(color));
-//         spr2.fillScreen(display::ColorUtil::color_to_565(color));
-           spr.fillScreen(TFT_WHITE);
-	   spr2.fillScreen(TFT_WHITE);
+        spr.fillScreen(display::ColorUtil::color_to_565(color));
+        spr2.fillScreen(display::ColorUtil::color_to_565(color));
+//            spr.fillScreen(TFT_WHITE);
+// 	   spr2.fillScreen(TFT_WHITE);
     }
 
     int get_width_internal() override {
