@@ -26,7 +26,8 @@ class TDisplayS3 : public PollingComponent,
 	spr2.createSprite(get_width_internal(), get_height_internal()/2);
 //         spr.createSprite(320, 240);
 //         spr2.createSprite(320, 240);
-        spr.fillScreen(TFT_WHITE);
+//         spr.fillScreen(TFT_WHITE);
+        spr.fillSprite(TFT_WHITE)
     }
 
     void loop() override {
