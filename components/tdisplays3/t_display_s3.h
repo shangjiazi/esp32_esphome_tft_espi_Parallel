@@ -21,8 +21,10 @@ class TDisplayS3 : public PollingComponent,
     void setup() override {
         tft.init();
         spr.setColorDepth(this->color_depth_);
-        spr.createSprite(get_width_internal(), get_height_internal());
-        tft.fillScreen(TFT_BLACK);
+        spr2.setColorDepth(this->color_depth_);
+        spr.createSprite(320, 240);
+        spr2.createSprite(320, 240);
+        tft.fillScreen(TFT_BLUE);
     }
 
     void loop() override {
@@ -53,6 +55,7 @@ class TDisplayS3 : public PollingComponent,
     //////////
     void fill(Color color) override {
         spr.fillScreen(display::ColorUtil::color_to_565(color));
+        spr2.fillScreen(display::ColorUtil::color_to_565(color));
     }
 
     int get_width_internal() override {
@@ -68,7 +71,13 @@ class TDisplayS3 : public PollingComponent,
     }
 
     void draw_absolute_pixel_internal(int x, int y, Color color) override {
+         { if ( y <= 240 )
+  
         spr.drawPixel(x, y, display::ColorUtil::color_to_565(color));
+        else
+        spr2.drawPixel(x, y-240, display::ColorUtil::color_to_565(color));
+        }
+        
     }
 
     /////////////
@@ -77,6 +86,7 @@ class TDisplayS3 : public PollingComponent,
     void update() override {
         this->do_update_();
         spr.pushSprite(0, 0);
+        spr2.pushSprite(0, 240);
     }
 
     void set_color_depth(int8_t color_depth) {
@@ -87,6 +97,7 @@ class TDisplayS3 : public PollingComponent,
     private:
     TFT_eSPI tft = TFT_eSPI();
     TFT_eSprite spr = TFT_eSprite(&tft);
+    TFT_eSprite spr2 = TFT_eSprite(&tft);
 
     protected:
     int8_t color_depth_;
