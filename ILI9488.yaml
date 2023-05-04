@@ -1,0 +1,73 @@
+esphome:
+  name: pingce
+
+external_components:
+  - source: github://shangjiazi/esp32_esphome_tft_espi_Parallel
+    components: [tdisplays3]
+    refresh: 0s
+
+esp32:
+  board: denky32
+  framework:
+    type: arduino
+
+# Enable Home Assistant API
+api:
+
+ota:
+  password: "6ada29f6f41ce1685d29d406efd25fa4"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+time:
+  - platform: homeassistant
+    id: ha_time
+
+
+font:
+  - file: "gfonts://Roboto"
+    id: roboto
+    size: 30
+
+display:
+  - platform: tdisplays3
+    id: disp
+    update_interval: 1s
+    # color_depth: 8
+    rotation: 0
+    user_build_flags:
+      - USER_SETUP_LOADED=1
+      - ILI9488_DRIVER
+      # - INIT_SEQUENCE_3
+      - CGRAM_OFFSET
+      - TFT_RGB_ORDER=TFT_BGR
+      # - TFT_INVERSION_ON=1 
+      - TFT_PARALLEL_8_BIT
+      - TFT_WIDTH=320
+      - TFT_HEIGHT=480
+      - TFT_CS=33
+      - TFT_DC=15 
+      - TFT_RST=32 
+      - TFT_WR=4
+      - TFT_RD=2 
+      - TFT_D0=12 
+      - TFT_D1=13 
+      - TFT_D2=26 
+      - TFT_D3=25 
+      - TFT_D4=17 
+      - TFT_D5=16 
+      - TFT_D6=27 
+      - TFT_D7=14 
+      - LOAD_GLCD=1 
+      - LOAD_FONT2=1 
+      - LOAD_FONT4=1 
+      - LOAD_FONT6=1 
+      - LOAD_FONT7=1 
+      - LOAD_FONT8=1 
+      - LOAD_GFXFF=1 
+      - SMOOTH_FONT=1  
+    lambda: |-
+      it.printf(20, 70, id(roboto), Color(255, 0, 0), id(ha_time).now().strftime("%Y-%m-%d %H:%M:%S").c_str());
+      it.printf(20, 240, id(roboto), Color(255, 0, 0), id(ha_time).now().strftime("%Y-%m-%d %H:%M:%S").c_str());
